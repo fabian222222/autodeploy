@@ -18,5 +18,4 @@ jobs:
         remote_host: 46.101.179.103
         remote_user: root
         remote_key: ${{ secrets.DEPLOY_KEY }}
-    - run: cd /var/www/fabdev.software/public_html
     - run: yarn start
