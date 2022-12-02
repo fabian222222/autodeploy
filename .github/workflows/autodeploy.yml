@@ -5,4 +5,12 @@ jobs:
   deploying:
     runs-on: ubuntu-latest
     steps:
-      - run: ssh -tt root@46.101.179.103
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with: 
+          key: ${{ secrets.PRIVATE_KEY }}
+          known_hosts: 'random'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy with rsync
+        run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/wwww/fabdev.software/public_html
