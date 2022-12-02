@@ -2,7 +2,7 @@ name: autodeploy
 run-name: ${{ github.actor }} is deploying to the server
 on: [push]
 jobs:
-  check-bats-version:
+  deploying:
     runs-on: ubuntu-latest
     steps:
-      - run: ssh root@46.101.179.103
+      - run: ssh -tt root@46.101.179.103
